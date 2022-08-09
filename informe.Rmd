@@ -1,36 +1,31 @@
 ---
-title: "titulo"
-author: "nombres"
+title: Trabajo Práctico I
+author: Constanza Guerrini
 output: html_document
 ---
-
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 # Cargar los paquetes necesarios acá
 ```
 
-
 ## Introducción
 
+Los datos que se utilizarán en este trabajo son datos sobre hogares y personas que brindan información sobre la situación laboral, características demográficas básicas (edad, sexo, situación conyugal, etc.), características migratorias, habitacionales, educacionales e ingresos.
 
+Dichos datos provienen de la Encuesta Permanente de Hogares (EPH), una encuesta realizada por el INDEC que indaga sobre las características demográficas y socioeconómicas de la población y se realiza en areas urbanas de todo el país.
+
+La EPH se realiza permanentemente durante los 365 días del año y sus resultados se publican por trimestres. Cada trimestre tiene 12 semanas de referencia, quedando siempre una semana libre (la 13) que no se toma como semana de referencia.
 
 ## Exploración de los datos
-
 
 ```{r}
 # Código para cargar o leer los datos
 ```
-
-
 
 ```{r}
 # Cödigo de R acá 
 # Agregá más bloques según sea necesario
 ```
 
-
-
 ## Hipótesis
-
-

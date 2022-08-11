@@ -22,16 +22,120 @@ Fueron tomados por la Dirección General de Estadística y Censos del Ministerio
 ## Exploración de los datos
 
 ```{r}
-# Código para cargar o leer los datos
 
 datos_tp <- read.csv("datos/tas_act_sexo__annio_limpio.csv")
 
 
 ```
 
+***Resumen estadístico de los datos:***
+
 ```{r}
-# Cödigo de R acá 
-# Agregá más bloques según sea necesario
+summary(datos_tp)
+```
+
+***Valores medios y desvío estándar***
+
+```{r}
+mean(datos_tp$tasa_actividad)
+
+```
+
+```{r}
+sd(datos_tp$tasa_actividad)
+```
+
+**Por sexo:**
+
+*Femenino*
+
+```{r}
+
+tasa_act_mujeres <- filter(datos_tp, sexo=="m")
+
+mean(tasa_act_mujeres$tasa_actividad)
+
+```
+
+```{r}
+
+sd(tasa_act_mujeres$tasa_actividad)
+```
+
+*Masculino*
+
+```{r}
+
+tasa_act_varones <- filter(datos_tp, sexo=="v")
+
+mean(tasa_act_mujeres$tasa_actividad)
+```
+
+```{r}
+
+sd(tasa_act_varones$tasa_actividad)
+```
+
+***Rango de los datos***
+
+```{r}
+
+range(datos_tp$tasa_actividad)
+
+```
+
+```{r}
+min(datos_tp$tasa_actividad)
+```
+
+```{r}
+max(datos_tp$tasa_actividad)
+```
+
+*Femenino*
+
+```{r}
+
+range(tasa_act_mujeres$tasa_actividad)
+
+```
+
+```{r}
+
+min(tasa_act_mujeres$tasa_actividad)
+```
+
+```{r}
+
+max(tasa_act_mujeres$tasa_actividad)
+```
+
+*Masculino*
+
+```{r}
+
+range(tasa_act_varones$tasa_actividad)
+
+```
+
+```{r}
+
+min(tasa_act_varones$tasa_actividad)
+```
+
+```{r}
+
+max(tasa_act_varones$tasa_actividad)
+```
+
+No se observan anomalías que sugieran datos incorrectos
+
+***Observaciones por cada grupo***
+
+```{r}
+
+# pensar como hacerrrrrrrr
+
 ```
 
 ## Hipótesis

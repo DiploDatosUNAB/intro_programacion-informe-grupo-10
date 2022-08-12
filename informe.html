@@ -368,19 +368,22 @@ pre code {
 </div>
 
 
-<div id="introducción" class="section level2">
-<h2>Introducción</h2>
+<div id="introducción" class="section level1">
+<h1><sup>Introducción</sup></h1>
 <p>Los datos que se utilizarán en el presente trabajo son datos sobre
 las tasas de actividad por sexo desde el año 2003 al 2019 en la Ciudad
 Autónoma de Buenos Aires.</p>
 <p>Fueron tomados por la Dirección General de Estadística y Censos del
-Ministerio de Economía y Finanzas de la Ciudad Autónoma de Buenos
-Aires.</p>
-</div>
+Ministerio de Economía y Finanzas de la Ciudad Autónoma de Buenos Aires
+entre los años 2003 y 2019.</p>
 <div id="exploración-de-los-datos" class="section level2">
 <h2>Exploración de los datos</h2>
 <pre class="r"><code>datos_tp &lt;- read.csv(&quot;datos/tas_act_sexo__annio_limpio.csv&quot;)</code></pre>
-<p><strong><em>Resumen estadístico de los datos:</em></strong></p>
+<div id="nombre-de-las-variables-y-resumen-estadístico-de-los-datos" class="section level3">
+<h3><u><strong><em>Nombre de las variables y Resumen estadístico de los
+datos:</em></strong></u></h3>
+<pre class="r"><code>names(datos_tp)</code></pre>
+<pre><code>## [1] &quot;anio&quot;           &quot;sexo&quot;           &quot;tasa_actividad&quot;</code></pre>
 <pre class="r"><code>summary(datos_tp)</code></pre>
 <pre><code>##       anio          sexo           tasa_actividad 
 ##  Min.   :2003   Length:51          Min.   :52.30  
@@ -389,53 +392,104 @@ Aires.</p>
 ##  Mean   :2011                      Mean   :62.92  
 ##  3rd Qu.:2015                      3rd Qu.:70.40  
 ##  Max.   :2019                      Max.   :72.60</code></pre>
-<p><strong><em>Valores medios y desvío estándar</em></strong></p>
+</div>
+<div id="valores-medios-y-desvío-estándar---general" class="section level3">
+<h3><u><strong><em>Valores Medios y Desvío Estándar -
+[General]</em></strong></u></h3>
 <pre class="r"><code>mean(datos_tp$tasa_actividad)</code></pre>
 <pre><code>## [1] 62.91743</code></pre>
+<p>Como se puede observar, la media de la tasa de actividad general (sin
+distinguir por género) es de 62.91743. Además, se observa un desvío
+estándar -en relación con esta tasa de actividad promedio- de
+6.747634.</p>
 <pre class="r"><code>sd(datos_tp$tasa_actividad)</code></pre>
 <pre><code>## [1] 6.747634</code></pre>
-<p><strong>Por sexo:</strong></p>
-<p><em>Femenino</em></p>
+</div>
+<div id="valores-medios-y-desvío-estándar---por-sexo" class="section level3">
+<h3><u><strong>Valores Medios y Desvío Estándar - [Por
+sexo]</strong></u></h3>
+<p><u><strong><em>Femenino</em></strong></u></p>
 <pre class="r"><code>tasa_act_mujeres &lt;- filter(datos_tp, sexo==&quot;m&quot;)
 
 mean(tasa_act_mujeres$tasa_actividad)</code></pre>
 <pre><code>## [1] 55.16945</code></pre>
+<p>En el caso de la tasa de actividad femenina, se observa un promedio
+(media) de 55.16945. La desviación estándar en relación con esa tasa de
+actividad media es de 1.925619.</p>
 <pre class="r"><code>sd(tasa_act_mujeres$tasa_actividad)</code></pre>
 <pre><code>## [1] 1.925619</code></pre>
-<p><em>Masculino</em></p>
+<p><u><strong><em>Masculino</em></strong></u></p>
 <pre class="r"><code>tasa_act_varones &lt;- filter(datos_tp, sexo==&quot;v&quot;)
 
-mean(tasa_act_mujeres$tasa_actividad)</code></pre>
-<pre><code>## [1] 55.16945</code></pre>
+mean(tasa_act_varones$tasa_actividad)</code></pre>
+<pre><code>## [1] 71.13577</code></pre>
+<p>La media de la tasa de actividad masculina es de 71.13577. Además, se
+observa un desvío estándar -en relación con esa tasa media- de
+1.040051.</p>
 <pre class="r"><code>sd(tasa_act_varones$tasa_actividad)</code></pre>
 <pre><code>## [1] 1.040051</code></pre>
-<p><strong><em>Rango de los datos</em></strong></p>
-<pre class="r"><code>range(datos_tp$tasa_actividad)</code></pre>
-<pre><code>## [1] 52.3 72.6</code></pre>
-<pre class="r"><code>min(datos_tp$tasa_actividad)</code></pre>
-<pre><code>## [1] 52.3</code></pre>
-<pre class="r"><code>max(datos_tp$tasa_actividad)</code></pre>
-<pre><code>## [1] 72.6</code></pre>
-<p><em>Femenino</em></p>
-<pre class="r"><code>range(tasa_act_mujeres$tasa_actividad)</code></pre>
-<pre><code>## [1] 52.3 58.9</code></pre>
-<pre class="r"><code>min(tasa_act_mujeres$tasa_actividad)</code></pre>
-<pre><code>## [1] 52.3</code></pre>
-<pre class="r"><code>max(tasa_act_mujeres$tasa_actividad)</code></pre>
-<pre><code>## [1] 58.9</code></pre>
-<p><em>Masculino</em></p>
-<pre class="r"><code>range(tasa_act_varones$tasa_actividad)</code></pre>
-<pre><code>## [1] 69.3 72.6</code></pre>
-<pre class="r"><code>min(tasa_act_varones$tasa_actividad)</code></pre>
-<pre><code>## [1] 69.3</code></pre>
-<pre class="r"><code>max(tasa_act_varones$tasa_actividad)</code></pre>
-<pre><code>## [1] 72.6</code></pre>
-<p>No se observan anomalías que sugieran datos incorrectos</p>
-<p><strong><em>Observaciones por cada grupo</em></strong></p>
-<pre class="r"><code># pensar como hacerrrrrrrr</code></pre>
+<p>La media de la tasa de actividad masculina supera por 15.96632 a la
+media de la tasa de actividad femenina.</p>
 </div>
-<div id="hipótesis" class="section level2">
-<h2>Hipótesis</h2>
+<div id="rango-de-los-datos---general" class="section level3">
+<h3><u><strong><em>Rango de los datos - [General]</em></strong></u></h3>
+<pre class="r"><code>max(datos_tp$tasa_actividad) - min(datos_tp$tasa_actividad)</code></pre>
+<pre><code>## [1] 20.3</code></pre>
+<p>La tasa de actividad sin distinción por sexo muestra un rango de
+20.3</p>
+</div>
+<div id="rango-de-los-datos---por-sexo" class="section level3">
+<h3><u><strong><em>Rango de los datos - [Por
+sexo]</em></strong></u></h3>
+<p><u><strong><em>Femenino</em></strong></u></p>
+<pre class="r"><code>max(tasa_act_mujeres$tasa_actividad)- min(tasa_act_mujeres$tasa_actividad)</code></pre>
+<pre><code>## [1] 6.6</code></pre>
+<p>La tasa de actividad de mujeres muestra un rango de 6.6</p>
+<p><u><strong><em>Masculino</em></strong></u></p>
+<pre class="r"><code>max(tasa_act_varones$tasa_actividad) - min(tasa_act_varones$tasa_actividad)</code></pre>
+<pre><code>## [1] 3.3</code></pre>
+<p>La tasa de actividad masculina muestra un rango de 3.3</p>
+<p>No se observan anomalías que sugieran datos incorrectos.</p>
+</div>
+<div id="observaciones-por-cada-grupo" class="section level3">
+<h3><u><strong><em>Observaciones por cada grupo</em></strong></u></h3>
+<pre class="r"><code>str(datos_tp)</code></pre>
+<pre><code>## &#39;data.frame&#39;:    51 obs. of  3 variables:
+##  $ anio          : int  2003 2003 2003 2004 2004 2004 2005 2005 2005 2006 ...
+##  $ sexo          : chr  &quot;TOTAL&quot; &quot;m&quot; &quot;v&quot; &quot;TOTAL&quot; ...
+##  $ tasa_actividad: num  60.7 52.3 70.9 61.7 53.9 71.3 62.5 55 71.4 62 ...</code></pre>
+<p>El data frame “datos_tp” tiene 51 observaciones y 3 variables.</p>
+<pre class="r"><code>str(tasa_act_mujeres)</code></pre>
+<pre><code>## &#39;data.frame&#39;:    17 obs. of  3 variables:
+##  $ anio          : int  2003 2004 2005 2006 2007 2008 2009 2010 2011 2012 ...
+##  $ sexo          : chr  &quot;m&quot; &quot;m&quot; &quot;m&quot; &quot;m&quot; ...
+##  $ tasa_actividad: num  52.3 53.9 55 53.7 53.9 ...</code></pre>
+<pre class="r"><code>str(tasa_act_varones)</code></pre>
+<pre><code>## &#39;data.frame&#39;:    17 obs. of  3 variables:
+##  $ anio          : int  2003 2004 2005 2006 2007 2008 2009 2010 2011 2012 ...
+##  $ sexo          : chr  &quot;v&quot; &quot;v&quot; &quot;v&quot; &quot;v&quot; ...
+##  $ tasa_actividad: num  70.9 71.3 71.4 72.2 72.6 ...</code></pre>
+<p>Los data frames “tasa_act_mujeres” y “tasa_act_varones” tienen 17
+observaciones y 3 variables cada uno.</p>
+<pre class="r"><code>anyNA(datos_tp)</code></pre>
+<pre><code>## [1] FALSE</code></pre>
+<p>No se observan valores faltantes.</p>
+</div>
+</div>
+</div>
+<div id="hipótesis" class="section level1">
+<h1>Hipótesis</h1>
+<ol style="list-style-type: decimal">
+<li><p>Una de las consecuencias de las políticas implementadas durante
+el gobierno de Mauricio Macri (2015-2019) es la reducción de la tasa de
+actividad masculina.</p></li>
+<li><p>Existe una brecha de género en la tasa de actividad. La tasa de
+actividad promedio de las mujeres es menor que la tasa de actividad
+promedio de los varones. Esto puede estar relacionado a que son las
+mujeres las que se encuentran a cargo de las tareas de cuidado y esto
+les dificulta la inserción en el mercado laboral.</p></li>
+<li></li>
+</ol>
 </div>
 
 

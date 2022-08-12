@@ -13,13 +13,13 @@ library(dplyr)
 
 ```
 
-## Introducción
+#  ^Introducción^
 
 Los datos que se utilizarán en el presente trabajo son datos sobre las tasas de actividad por sexo desde el año 2003 al 2019 en la Ciudad Autónoma de Buenos Aires.
 
-Fueron tomados por la Dirección General de Estadística y Censos del Ministerio de Economía y Finanzas de la Ciudad Autónoma de Buenos Aires.
+Fueron tomados por la Dirección General de Estadística y Censos del Ministerio de Economía y Finanzas de la Ciudad Autónoma de Buenos Aires entre los años 2003 y 2019.
 
-## Exploración de los datos
+##                                 Exploración de los datos
 
 ```{r}
 
@@ -28,26 +28,36 @@ datos_tp <- read.csv("datos/tas_act_sexo__annio_limpio.csv")
 
 ```
 
-***Resumen estadístico de los datos:***
+### [***Nombre de las variables y Resumen estadístico de los datos:***]{.underline}
 
 ```{r}
-summary(datos_tp)
+
+names(datos_tp)
+
 ```
 
-***Valores medios y desvío estándar***
+```{r}
+
+summary(datos_tp)
+
+```
+
+### [***Valores Medios y Desvío Estándar - [General]***]{.underline}
 
 ```{r}
 mean(datos_tp$tasa_actividad)
 
 ```
 
+Como se puede observar, la media de la tasa de actividad general (sin distinguir por género) es de 62.91743. Además, se observa un desvío estándar -en relación con esta tasa de actividad promedio- de 6.747634.
+
 ```{r}
 sd(datos_tp$tasa_actividad)
 ```
 
-**Por sexo:**
+### [**Valores Medios y Desvío Estándar - [Por sexo]**]{.underline}
 
-*Femenino*
+[***Femenino***]{.underline}
 
 ```{r}
 
@@ -57,85 +67,90 @@ mean(tasa_act_mujeres$tasa_actividad)
 
 ```
 
+En el caso de la tasa de actividad femenina, se observa un promedio (media) de 55.16945. La desviación estándar en relación con esa tasa de actividad media es de 1.925619.
+
 ```{r}
 
 sd(tasa_act_mujeres$tasa_actividad)
 ```
 
-*Masculino*
+[***Masculino***]{.underline}
 
 ```{r}
 
 tasa_act_varones <- filter(datos_tp, sexo=="v")
 
-mean(tasa_act_mujeres$tasa_actividad)
+mean(tasa_act_varones$tasa_actividad)
 ```
+
+La media de la tasa de actividad masculina es de 71.13577. Además, se observa un desvío estándar -en relación con esa tasa media- de 1.040051.
 
 ```{r}
 
 sd(tasa_act_varones$tasa_actividad)
 ```
 
-***Rango de los datos***
+La media de la tasa de actividad masculina supera por 15.96632 a la media de la tasa de actividad femenina.
+
+### [***Rango de los datos - [General]***]{.underline}
+
+```{r}
+max(datos_tp$tasa_actividad) - min(datos_tp$tasa_actividad)
+```
+
+La tasa de actividad sin distinción por sexo muestra un rango de 20.3
+
+### [***Rango de los datos - [Por sexo]***]{.underline}
+
+[***Femenino***]{.underline}
 
 ```{r}
 
-range(datos_tp$tasa_actividad)
-
+max(tasa_act_mujeres$tasa_actividad)- min(tasa_act_mujeres$tasa_actividad)
 ```
 
-```{r}
-min(datos_tp$tasa_actividad)
-```
+La tasa de actividad de mujeres muestra un rango de 6.6
 
-```{r}
-max(datos_tp$tasa_actividad)
-```
-
-*Femenino*
+[***Masculino***]{.underline}
 
 ```{r}
 
-range(tasa_act_mujeres$tasa_actividad)
+max(tasa_act_varones$tasa_actividad) - min(tasa_act_varones$tasa_actividad)
 
 ```
+
+La tasa de actividad masculina muestra un rango de 3.3
+
+No se observan anomalías que sugieran datos incorrectos.
+
+### [***Observaciones por cada grupo***]{.underline}
 
 ```{r}
 
-min(tasa_act_mujeres$tasa_actividad)
+str(datos_tp)
+
 ```
+
+El data frame "datos_tp" tiene 51 observaciones y 3 variables.
 
 ```{r}
+str(tasa_act_mujeres)
 
-max(tasa_act_mujeres$tasa_actividad)
+str(tasa_act_varones)
 ```
 
-*Masculino*
+Los data frames "tasa_act_mujeres" y "tasa_act_varones" tienen 17 observaciones y 3 variables cada uno.
 
 ```{r}
-
-range(tasa_act_varones$tasa_actividad)
-
+anyNA(datos_tp)
 ```
 
-```{r}
+No se observan valores faltantes.
 
-min(tasa_act_varones$tasa_actividad)
-```
+#                            Hipótesis
 
-```{r}
+1.  Una de las consecuencias de las políticas implementadas durante el gobierno de Mauricio Macri (2015-2019) es la reducción de la tasa de actividad masculina.
 
-max(tasa_act_varones$tasa_actividad)
-```
+2.  Existe una brecha de género en la tasa de actividad. La tasa de actividad promedio de las mujeres es menor que la tasa de actividad promedio de los varones. Esto puede estar relacionado a que son las mujeres las que se encuentran a cargo de las tareas de cuidado y esto les dificulta la inserción en el mercado laboral.
 
-No se observan anomalías que sugieran datos incorrectos
-
-***Observaciones por cada grupo***
-
-```{r}
-
-# pensar como hacerrrrrrrr
-
-```
-
-## Hipótesis
+3.  

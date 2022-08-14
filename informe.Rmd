@@ -13,13 +13,13 @@ library(dplyr)
 
 ```
 
-#  ^Introducción^
+# ^Introducción^
 
 Los datos que se utilizarán en el presente trabajo son datos sobre las tasas de actividad por sexo desde el año 2003 al 2019 en la Ciudad Autónoma de Buenos Aires.
 
 Fueron tomados por la Dirección General de Estadística y Censos del Ministerio de Economía y Finanzas de la Ciudad Autónoma de Buenos Aires entre los años 2003 y 2019.
 
-##                                 Exploración de los datos
+## Exploración de los datos
 
 ```{r}
 
@@ -45,14 +45,16 @@ summary(datos_tp)
 ### [***Valores Medios y Desvío Estándar - [General]***]{.underline}
 
 ```{r}
-mean(datos_tp$tasa_actividad)
+tasa_act_gral <- filter(datos_tp, sexo=="TOTAL")
+
+mean(tasa_act_gral$tasa_actividad)
 
 ```
 
-Como se puede observar, la media de la tasa de actividad general (sin distinguir por género) es de 62.91743. Además, se observa un desvío estándar -en relación con esta tasa de actividad promedio- de 6.747634.
+Como se puede observar, la media de la tasa de actividad general (sin distinguir por género) es de 62.44706. Además, se observa un desvío estándar -en relación con esta tasa de actividad promedio- de 1.308681
 
 ```{r}
-sd(datos_tp$tasa_actividad)
+sd(tasa_act_gral$tasa_actividad)
 ```
 
 ### [**Valores Medios y Desvío Estándar - [Por sexo]**]{.underline}
@@ -95,10 +97,10 @@ La media de la tasa de actividad masculina supera por 15.96632 a la media de la 
 ### [***Rango de los datos - [General]***]{.underline}
 
 ```{r}
-max(datos_tp$tasa_actividad) - min(datos_tp$tasa_actividad)
+max(tasa_act_gral$tasa_actividad) - min(tasa_act_gral$tasa_actividad)
 ```
 
-La tasa de actividad sin distinción por sexo muestra un rango de 20.3
+La tasa de actividad sin distinción por sexo muestra un rango de 4.3.
 
 ### [***Rango de los datos - [Por sexo]***]{.underline}
 
@@ -147,10 +149,8 @@ anyNA(datos_tp)
 
 No se observan valores faltantes.
 
-#                            Hipótesis
+# Hipótesis
 
 1.  Una de las consecuencias de las políticas implementadas durante el gobierno de Mauricio Macri (2015-2019) es la reducción de la tasa de actividad masculina.
 
 2.  Existe una brecha de género en la tasa de actividad. La tasa de actividad promedio de las mujeres es menor que la tasa de actividad promedio de los varones. Esto puede estar relacionado a que son las mujeres las que se encuentran a cargo de las tareas de cuidado y esto les dificulta la inserción en el mercado laboral.
-
-3.  

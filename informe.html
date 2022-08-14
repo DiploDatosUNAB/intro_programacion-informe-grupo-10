@@ -396,14 +396,16 @@ datos:</em></strong></u></h3>
 <div id="valores-medios-y-desvío-estándar---general" class="section level3">
 <h3><u><strong><em>Valores Medios y Desvío Estándar -
 [General]</em></strong></u></h3>
-<pre class="r"><code>mean(datos_tp$tasa_actividad)</code></pre>
-<pre><code>## [1] 62.91743</code></pre>
+<pre class="r"><code>tasa_act_gral &lt;- filter(datos_tp, sexo==&quot;TOTAL&quot;)
+
+mean(tasa_act_gral$tasa_actividad)</code></pre>
+<pre><code>## [1] 62.44706</code></pre>
 <p>Como se puede observar, la media de la tasa de actividad general (sin
-distinguir por género) es de 62.91743. Además, se observa un desvío
+distinguir por género) es de 62.44706. Además, se observa un desvío
 estándar -en relación con esta tasa de actividad promedio- de
-6.747634.</p>
-<pre class="r"><code>sd(datos_tp$tasa_actividad)</code></pre>
-<pre><code>## [1] 6.747634</code></pre>
+1.308681</p>
+<pre class="r"><code>sd(tasa_act_gral$tasa_actividad)</code></pre>
+<pre><code>## [1] 1.308681</code></pre>
 </div>
 <div id="valores-medios-y-desvío-estándar---por-sexo" class="section level3">
 <h3><u><strong>Valores Medios y Desvío Estándar - [Por
@@ -433,10 +435,10 @@ media de la tasa de actividad femenina.</p>
 </div>
 <div id="rango-de-los-datos---general" class="section level3">
 <h3><u><strong><em>Rango de los datos - [General]</em></strong></u></h3>
-<pre class="r"><code>max(datos_tp$tasa_actividad) - min(datos_tp$tasa_actividad)</code></pre>
-<pre><code>## [1] 20.3</code></pre>
+<pre class="r"><code>max(tasa_act_gral$tasa_actividad) - min(tasa_act_gral$tasa_actividad)</code></pre>
+<pre><code>## [1] 4.3</code></pre>
 <p>La tasa de actividad sin distinción por sexo muestra un rango de
-20.3</p>
+4.3.</p>
 </div>
 <div id="rango-de-los-datos---por-sexo" class="section level3">
 <h3><u><strong><em>Rango de los datos - [Por
@@ -488,7 +490,6 @@ actividad promedio de las mujeres es menor que la tasa de actividad
 promedio de los varones. Esto puede estar relacionado a que son las
 mujeres las que se encuentran a cargo de las tareas de cuidado y esto
 les dificulta la inserción en el mercado laboral.</p></li>
-<li></li>
 </ol>
 </div>
 

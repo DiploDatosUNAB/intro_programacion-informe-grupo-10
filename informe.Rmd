@@ -1,5 +1,5 @@
 ---
-title: Trabajo Práctico I
+title: Trabajo Práctico II
 author: Constanza Guerrini
 output: html_document
 ---
@@ -170,13 +170,13 @@ No se observan valores faltantes.
       guides(fill = guide_legend(title="Tasa de Actividad")) +
       theme_minimal() +
       theme(panel.border = element_rect(color = "black", fill = NA))+
-      theme(title = element_text(size = 12, face = "bold"))
+      theme(title = element_text(size = 10, face = "bold"))
 
 
 
     ```
 
-    Como se puede observar en el gráfico durante el período 2015-2019 se produce una baja de la tasa de actividad masculina.
+    Como se puede observar en el gráfico, durante el período 2015-2019 se produce una baja de la tasa de actividad masculina.
 
 2.  **Existe una brecha de género en la tasa de actividad. La tasa de actividad promedio de las mujeres es menor que la tasa de actividad promedio de los varones. Esto puede estar relacionado a que son las mujeres las que se encuentran a cargo de las tareas de cuidado y esto les dificulta la inserción en el mercado laboral.**
 
@@ -198,7 +198,7 @@ labs(x= "Sexo",
   guides(fill = guide_legend(title="Tasa de Actividad")) +
   theme_minimal() +
   theme(panel.border = element_rect(color = "black", fill = NA))+
-  theme(title = element_text(size = 12, face = "bold"))
+  theme(title = element_text(size = 10, face = "bold"))
 
 
 

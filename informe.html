@@ -491,6 +491,15 @@ promedio de los varones. Esto puede estar relacionado a que son las
 mujeres las que se encuentran a cargo de las tareas de cuidado y esto
 les dificulta la inserción en el mercado laboral.</p></li>
 </ol>
+<pre class="r"><code>datos_tp |&gt; 
+  group_by(sexo) |&gt; 
+  summarise(tasa_actividad = mean(tasa_actividad))</code></pre>
+<pre><code>## # A tibble: 3 × 2
+##   sexo  tasa_actividad
+##   &lt;chr&gt;          &lt;dbl&gt;
+## 1 m               55.2
+## 2 TOTAL           62.4
+## 3 v               71.1</code></pre>
 </div>
 
 

@@ -10,6 +10,8 @@ knitr::opts_chunk$set(echo = TRUE)
 
 library(readr)
 library(dplyr)
+library(tidyverse)
+
 
 ```
 
@@ -151,6 +153,53 @@ No se observan valores faltantes.
 
 # Hipótesis
 
-1.  Una de las consecuencias de las políticas implementadas durante el gobierno de Mauricio Macri (2015-2019) es la reducción de la tasa de actividad masculina.
+1.  **Durante el período 2015-2019 hubo una reducción de la tasa de actividad masculiuna.**
 
-2.  Existe una brecha de género en la tasa de actividad. La tasa de actividad promedio de las mujeres es menor que la tasa de actividad promedio de los varones. Esto puede estar relacionado a que son las mujeres las que se encuentran a cargo de las tareas de cuidado y esto les dificulta la inserción en el mercado laboral.
+    ```{r}
+     periodo <- filter(tasa_act_varones, anio>=2015) 
+     
+       ggplot(periodo) +
+       geom_col(aes(x=anio,
+                    y= tasa_actividad, fill=factor(tasa_actividad)))+
+      scale_y_continuous(breaks=seq(0, 75, by=25)) +
+           
+       labs(x= "Año",
+           y= "Tasa de actividad",
+           title= "Tasa de actividad masculina 2015-2019",
+           caption = "Fuente: Ministerio de Economía y Finanzas. Dirección General de Estadística y Censos. GCBA") +
+      guides(fill = guide_legend(title="Tasa de Actividad")) +
+      theme_minimal() +
+      theme(panel.border = element_rect(color = "black", fill = NA))+
+      theme(title = element_text(size = 12, face = "bold"))
+
+
+
+    ```
+
+    Como se puede observar en el gráfico durante el período 2015-2019 se produce una baja de la tasa de actividad masculina.
+
+2.  **Existe una brecha de género en la tasa de actividad. La tasa de actividad promedio de las mujeres es menor que la tasa de actividad promedio de los varones. Esto puede estar relacionado a que son las mujeres las que se encuentran a cargo de las tareas de cuidado y esto les dificulta la inserción en el mercado laboral.**
+
+```{r}
+tasa_resumen <- datos_tp %>% 
+  group_by(sexo) %>%
+  summarise(tasa_actividad = mean(tasa_actividad))
+
+tasa_filtrada <- filter(tasa_resumen, sexo  != "TOTAL")
+
+ggplot(tasa_filtrada)+
+  geom_col(aes(x=sexo,
+                y= tasa_actividad, fill=factor(tasa_actividad)))+
+
+labs(x= "Sexo",
+       y= "Tasa de actividad",
+       title= "Tasa de actividad promedio por sexo",
+       caption = "Fuente: Ministerio de Economía y Finanzas. Dirección General de Estadística y Censos. GCBA") +
+  guides(fill = guide_legend(title="Tasa de Actividad")) +
+  theme_minimal() +
+  theme(panel.border = element_rect(color = "black", fill = NA))+
+  theme(title = element_text(size = 12, face = "bold"))
+
+
+
+```

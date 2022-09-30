@@ -166,10 +166,14 @@ labs(x= "Sexo",
 
 ```
 
-Serie temporal tasa de actividad masculina y femenina 2015-2019
+**Brecha de género: Serie temporal de la tasa de actividad masculina y femenina 2015-2019**
 
 ```{r}
+aber <- datos_tp %>% 
+  filter(anio >=2015 & sexo != "TOTAL")
 
+ggplot(data = aber, aes(x = anio, y = tasa_actividad))+
+     geom_line(aes(group = sexo, color=sexo), size=2) 
 
 
 ```

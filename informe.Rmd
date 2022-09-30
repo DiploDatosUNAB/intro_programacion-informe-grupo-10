@@ -160,11 +160,13 @@ labs(x= "Sexo",
 **Brecha de género: Serie temporal de la tasa de actividad masculina y femenina 2015-2019**
 
 ```{r}
-aber <- datos_tp %>% 
+brecha <- datos_tp %>% 
   filter(anio >=2015 & sexo != "TOTAL")
 
-ggplot(data = aber, aes(x = anio, y = tasa_actividad))+
+ggplot(data = brecha, aes(x = anio, y = tasa_actividad))+
      geom_line(aes(group = sexo, color=sexo), size=2) 
 
 
 ```
+
+Finalmente se puede apreciar que existe una gran brecha de género entre la tasa de actividad femenina y la tasa de actividad masculina. Esta brecha es de entre 15 y 13 puntos y fue disminuyendo con el correr de los años dentro del período analizado.

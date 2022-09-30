@@ -143,14 +143,11 @@ No se observan valores faltantes.
 
     Como se puede observar en el gráfico, durante el período 2015-2019 se produce una baja de la tasa de actividad masculina.
 
-2.  **Existe una brecha de género en la tasa de actividad. La tasa de actividad promedio de las mujeres es menor que la tasa de actividad promedio de los varones. Esto puede estar relacionado a que son las mujeres las que se encuentran a cargo de las tareas de cuidado y esto les dificulta la inserción en el mercado laboral.**
+2.  **Existe una brecha de género en la tasa de actividad. La tasa de actividad promedio de las mujeres es menor que la tasa de actividad promedio de los varones.**
 
 ```{r}
-tasa_resumen <- datos_tp %>% 
-  group_by(sexo) %>%
-  summarise(tasa_actividad = mean(tasa_actividad))
 
-tasa_filtrada <- filter(tasa_resumen, sexo  != "TOTAL")
+tasa_filtrada <- filter(media, sexo  != "TOTAL")
 
 ggplot(tasa_filtrada)+
   geom_col(aes(x=sexo,
@@ -159,11 +156,19 @@ ggplot(tasa_filtrada)+
 labs(x= "Sexo",
        y= "Tasa de actividad",
        title= "Tasa de actividad promedio por sexo",
-       caption = "Fuente: Ministerio de Economía y Finanzas. Dirección General de Estadística y Censos. GCBA") +
+       caption = "Fuente: Ministerio de Economía y Finanzas. Dirección Gral. de Estadística y Censos.GCBA") +
   guides(fill = guide_legend(title="Tasa de Actividad")) +
   theme_minimal() +
   theme(panel.border = element_rect(color = "black", fill = NA))+
   theme(title = element_text(size = 10, face = "bold"))
+
+
+
+```
+
+Serie temporal tasa de actividad masculina y femenina 2015-2019
+
+```{r}
 
 
 

@@ -1,5 +1,5 @@
 ---
-title: Trabajo Práctico I
+title: Trabajo Práctico II
 author: Constanza Guerrini
 output: html_document
 ---
@@ -10,6 +10,8 @@ knitr::opts_chunk$set(echo = TRUE)
 
 library(readr)
 library(dplyr)
+library(tidyverse)
+
 
 ```
 
@@ -42,86 +44,55 @@ summary(datos_tp)
 
 ```
 
-### [***Valores Medios y Desvío Estándar - [General]***]{.underline}
+### [***Valores Medios y Desvío Estándar***]{.underline}
 
 ```{r}
-tasa_act_gral <- filter(datos_tp, sexo=="TOTAL")
-
-mean(tasa_act_gral$tasa_actividad)
+media <- datos_tp |> 
+  group_by(sexo) |> 
+  summarise(tasa_actividad = mean(tasa_actividad))
 
 ```
 
-Como se puede observar, la media de la tasa de actividad general (sin distinguir por género) es de 62.44706. Además, se observa un desvío estándar -en relación con esta tasa de actividad promedio- de 1.308681
+Como se puede observar, la media de la tasa de actividad general (sin distinguir por género) es de 62.44706. En el caso de la tasa de actividad femenina, se observa un promedio (media) de 55.16945 y para el genero masculino, la media de la tasa de actividad es de 71.13577.
 
 ```{r}
-sd(tasa_act_gral$tasa_actividad)
+sd <- datos_tp |> 
+  group_by(sexo) |> 
+  summarise(tasa_actividad = sd(tasa_actividad))
 ```
 
-### [**Valores Medios y Desvío Estándar - [Por sexo]**]{.underline}
-
-[***Femenino***]{.underline}
-
-```{r}
-
-tasa_act_mujeres <- filter(datos_tp, sexo=="m")
-
-mean(tasa_act_mujeres$tasa_actividad)
-
-```
-
-En el caso de la tasa de actividad femenina, se observa un promedio (media) de 55.16945. La desviación estándar en relación con esa tasa de actividad media es de 1.925619.
-
-```{r}
-
-sd(tasa_act_mujeres$tasa_actividad)
-```
-
-[***Masculino***]{.underline}
-
-```{r}
-
-tasa_act_varones <- filter(datos_tp, sexo=="v")
-
-mean(tasa_act_varones$tasa_actividad)
-```
-
-La media de la tasa de actividad masculina es de 71.13577. Además, se observa un desvío estándar -en relación con esa tasa media- de 1.040051.
-
-```{r}
-
-sd(tasa_act_varones$tasa_actividad)
-```
+Se observa un desvío estándar -en relación con esta tasa de actividad promedio- de 1.308681. Por su parte, la desviación estándar en relación con la tasa de actividad media masculina es de 1.925619.\
+En cuanto a la tasa promedio femenina se observa un desvío estándar -en relación con esa tasa media- de 1.040051.
 
 La media de la tasa de actividad masculina supera por 15.96632 a la media de la tasa de actividad femenina.
 
-### [***Rango de los datos - [General]***]{.underline}
+### [***Rango de los datos***]{.underline}
 
-```{r}
-max(tasa_act_gral$tasa_actividad) - min(tasa_act_gral$tasa_actividad)
-```
-
-La tasa de actividad sin distinción por sexo muestra un rango de 4.3.
-
-### [***Rango de los datos - [Por sexo]***]{.underline}
-
-[***Femenino***]{.underline}
+**General**
 
 ```{r}
 
-max(tasa_act_mujeres$tasa_actividad)- min(tasa_act_mujeres$tasa_actividad)
+max(filter(datos_tp, sexo=="TOTAL")$tasa_actividad) - min(filter(datos_tp, sexo=="TOTAL")$tasa_actividad)
+
+
 ```
 
-La tasa de actividad de mujeres muestra un rango de 6.6
-
-[***Masculino***]{.underline}
+**Varones**
 
 ```{r}
 
-max(tasa_act_varones$tasa_actividad) - min(tasa_act_varones$tasa_actividad)
+max(filter(datos_tp, sexo=="v")$tasa_actividad) - min(filter(datos_tp, sexo=="v")$tasa_actividad)
+```
+
+**Mujeres**
+
+```{r}
+
+max(filter(datos_tp, sexo=="m")$tasa_actividad) - min(filter(datos_tp, sexo=="m")$tasa_actividad)
 
 ```
 
-La tasa de actividad masculina muestra un rango de 3.3
+La tasa de actividad sin distinción por sexo muestra un rango de 4.3. Mientras que el rango de la tasa de actividad masculina es de 3.3 y el de la femenina de 6.6.
 
 No se observan anomalías que sugieran datos incorrectos.
 
@@ -136,14 +107,6 @@ str(datos_tp)
 El data frame "datos_tp" tiene 51 observaciones y 3 variables.
 
 ```{r}
-str(tasa_act_mujeres)
-
-str(tasa_act_varones)
-```
-
-Los data frames "tasa_act_mujeres" y "tasa_act_varones" tienen 17 observaciones y 3 variables cada uno.
-
-```{r}
 anyNA(datos_tp)
 ```
 
@@ -151,6 +114,59 @@ No se observan valores faltantes.
 
 # Hipótesis
 
-1.  Una de las consecuencias de las políticas implementadas durante el gobierno de Mauricio Macri (2015-2019) es la reducción de la tasa de actividad masculina.
+1.  **Durante el período 2015-2019 hubo una reducción de la tasa de actividad masculiuna.**
 
-2.  Existe una brecha de género en la tasa de actividad. La tasa de actividad promedio de las mujeres es menor que la tasa de actividad promedio de los varones. Esto puede estar relacionado a que son las mujeres las que se encuentran a cargo de las tareas de cuidado y esto les dificulta la inserción en el mercado laboral.
+    ```{r}
+     periodo <- filter(datos_tp, anio>=2015 & sexo=='v') 
+     
+       ggplot(data = periodo, aes(x = anio , y = tasa_actividad)) +
+      geom_line() +
+      labs(x= "Año",
+           y= "Tasa de actividad",
+           title= "Tasa de actividad masculina 2015-2019",
+           caption = "Fuente: Ministerio de Economía y Finanzas. 
+           Dirección General de Estadística y Censos. GCBA") 
+
+
+
+
+    ```
+
+    Como se puede observar en el gráfico, durante el período 2015-2019 se produce una baja de la tasa de actividad masculina.
+
+2.  **Existe una brecha de género en la tasa de actividad. La tasa de actividad promedio de las mujeres es menor que la tasa de actividad promedio de los varones.**
+
+```{r}
+
+tasa_filtrada <- filter(media, sexo  != "TOTAL")
+
+ggplot(tasa_filtrada)+
+  geom_col(aes(x=sexo,
+                y= tasa_actividad, fill=factor(tasa_actividad)))+
+
+labs(x= "Sexo",
+       y= "Tasa de actividad",
+       title= "Tasa de actividad promedio por sexo",
+       caption = "Fuente: Ministerio de Economía y Finanzas. Dirección Gral. de Estadística y Censos.GCBA") +
+  guides(fill = guide_legend(title="Tasa de Actividad")) +
+  theme_minimal() +
+  theme(panel.border = element_rect(color = "black", fill = NA))+
+  theme(title = element_text(size = 10, face = "bold"))
+
+
+
+```
+
+**Brecha de género: Serie temporal de la tasa de actividad masculina y femenina 2015-2019**
+
+```{r}
+brecha <- datos_tp %>% 
+  filter(anio >=2015 & sexo != "TOTAL")
+
+ggplot(data = brecha, aes(x = anio, y = tasa_actividad))+
+     geom_line(aes(group = sexo, color=sexo), size=2) 
+
+
+```
+
+Finalmente se puede apreciar que existe una gran brecha de género entre la tasa de actividad femenina y la tasa de actividad masculina. Esta brecha es de entre 15 y 13 puntos y fue disminuyendo con el correr de los años dentro del período analizado.

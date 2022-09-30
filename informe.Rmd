@@ -44,55 +44,25 @@ summary(datos_tp)
 
 ```
 
-### [***Valores Medios y Desvío Estándar - [General]***]{.underline}
+### [***Valores Medios y Desvío Estándar***]{.underline} 
 
 ```{r}
-tasa_act_gral <- filter(datos_tp, sexo=="TOTAL")
-
-mean(tasa_act_gral$tasa_actividad)
+media <- datos_tp |> 
+  group_by(sexo) |> 
+  summarise(tasa_actividad = mean(tasa_actividad))
 
 ```
 
-Como se puede observar, la media de la tasa de actividad general (sin distinguir por género) es de 62.44706. Además, se observa un desvío estándar -en relación con esta tasa de actividad promedio- de 1.308681
+Como se puede observar, la media de la tasa de actividad general (sin distinguir por género) es de 62.44706. En el caso de la tasa de actividad femenina, se observa un promedio (media) de 55.16945 y para el genero masculino, la media de la tasa de actividad es de 71.13577.
 
 ```{r}
-sd(tasa_act_gral$tasa_actividad)
+sd <- datos_tp |> 
+  group_by(sexo) |> 
+  summarise(tasa_actividad = sd(tasa_actividad))
 ```
 
-### [**Valores Medios y Desvío Estándar - [Por sexo]**]{.underline}
-
-[***Femenino***]{.underline}
-
-```{r}
-
-tasa_act_mujeres <- filter(datos_tp, sexo=="m")
-
-mean(tasa_act_mujeres$tasa_actividad)
-
-```
-
-En el caso de la tasa de actividad femenina, se observa un promedio (media) de 55.16945. La desviación estándar en relación con esa tasa de actividad media es de 1.925619.
-
-```{r}
-
-sd(tasa_act_mujeres$tasa_actividad)
-```
-
-[***Masculino***]{.underline}
-
-```{r}
-
-tasa_act_varones <- filter(datos_tp, sexo=="v")
-
-mean(tasa_act_varones$tasa_actividad)
-```
-
-La media de la tasa de actividad masculina es de 71.13577. Además, se observa un desvío estándar -en relación con esa tasa media- de 1.040051.
-
-```{r}
-
-sd(tasa_act_varones$tasa_actividad)
-```
+Se observa un desvío estándar -en relación con esta tasa de actividad promedio- de 1.308681. Por su parte, la desviación estándar en relación con la tasa de actividad media masculina es de 1.925619.\
+En cuanto a la tasa promedio femenina se observa un desvío estándar -en relación con esa tasa media- de 1.040051.
 
 La media de la tasa de actividad masculina supera por 15.96632 a la media de la tasa de actividad femenina.
 
@@ -156,21 +126,16 @@ No se observan valores faltantes.
 1.  **Durante el período 2015-2019 hubo una reducción de la tasa de actividad masculiuna.**
 
     ```{r}
-     periodo <- filter(tasa_act_varones, anio>=2015) 
+     periodo <- filter(datos_tp, anio>=2015 & sexo=='v') 
      
-       ggplot(periodo) +
-       geom_col(aes(x=anio,
-                    y= tasa_actividad, fill=factor(tasa_actividad)))+
-      scale_y_continuous(breaks=seq(0, 75, by=25)) +
-           
-       labs(x= "Año",
+       ggplot(data = periodo, aes(x = anio , y = tasa_actividad)) +
+      geom_line() +
+      labs(x= "Año",
            y= "Tasa de actividad",
            title= "Tasa de actividad masculina 2015-2019",
-           caption = "Fuente: Ministerio de Economía y Finanzas. Dirección General de Estadística y Censos. GCBA") +
-      guides(fill = guide_legend(title="Tasa de Actividad")) +
-      theme_minimal() +
-      theme(panel.border = element_rect(color = "black", fill = NA))+
-      theme(title = element_text(size = 10, face = "bold"))
+           caption = "Fuente: Ministerio de Economía y Finanzas. 
+           Dirección General de Estadística y Censos. GCBA") 
+
 
 
 

@@ -44,7 +44,7 @@ summary(datos_tp)
 
 ```
 
-### [***Valores Medios y Desvío Estándar***]{.underline} 
+### [***Valores Medios y Desvío Estándar***]{.underline}
 
 ```{r}
 media <- datos_tp |> 
@@ -66,34 +66,33 @@ En cuanto a la tasa promedio femenina se observa un desvío estándar -en relaci
 
 La media de la tasa de actividad masculina supera por 15.96632 a la media de la tasa de actividad femenina.
 
-### [***Rango de los datos - [General]***]{.underline}
+### [***Rango de los datos***]{.underline}
 
-```{r}
-max(tasa_act_gral$tasa_actividad) - min(tasa_act_gral$tasa_actividad)
-```
-
-La tasa de actividad sin distinción por sexo muestra un rango de 4.3.
-
-### [***Rango de los datos - [Por sexo]***]{.underline}
-
-[***Femenino***]{.underline}
+**General**
 
 ```{r}
 
-max(tasa_act_mujeres$tasa_actividad)- min(tasa_act_mujeres$tasa_actividad)
+max(filter(datos_tp, sexo=="TOTAL")$tasa_actividad) - min(filter(datos_tp, sexo=="TOTAL")$tasa_actividad)
+
+
 ```
 
-La tasa de actividad de mujeres muestra un rango de 6.6
-
-[***Masculino***]{.underline}
+**Varones**
 
 ```{r}
 
-max(tasa_act_varones$tasa_actividad) - min(tasa_act_varones$tasa_actividad)
+max(filter(datos_tp, sexo=="v")$tasa_actividad) - min(filter(datos_tp, sexo=="v")$tasa_actividad)
+```
+
+**Mujeres**
+
+```{r}
+
+max(filter(datos_tp, sexo=="m")$tasa_actividad) - min(filter(datos_tp, sexo=="m")$tasa_actividad)
 
 ```
 
-La tasa de actividad masculina muestra un rango de 3.3
+La tasa de actividad sin distinción por sexo muestra un rango de 4.3. Mientras que el rango de la tasa de actividad masculina es de 3.3 y el de la femenina de 6.6.
 
 No se observan anomalías que sugieran datos incorrectos.
 
@@ -106,14 +105,6 @@ str(datos_tp)
 ```
 
 El data frame "datos_tp" tiene 51 observaciones y 3 variables.
-
-```{r}
-str(tasa_act_mujeres)
-
-str(tasa_act_varones)
-```
-
-Los data frames "tasa_act_mujeres" y "tasa_act_varones" tienen 17 observaciones y 3 variables cada uno.
 
 ```{r}
 anyNA(datos_tp)
